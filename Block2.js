@@ -7,6 +7,7 @@ class Block2{
             speed:2
          
           }
+          this.visibility = 225;
         this.body=Bodies.rectangle(x,y,width,height,options);
         this.width =width;
         this.height =height;
@@ -30,7 +31,7 @@ class Block2{
        else{
         World.remove(world,this.body);
         push();
-        this.Visibility = this.Visibility - 5;
+        this.visibility = this.visibility - 5;
       tint(255, this.visibility);
     // image(this.image,this.body.position.x,this.body.position.y,50,50);
         pop();
@@ -39,7 +40,7 @@ class Block2{
        
     }
     score(){
-        if(this.Visibility<0&&this.Visibility>1005){
+        if(this.visibility<0&&this.visibility>-105){
      score++
  }}
 }
