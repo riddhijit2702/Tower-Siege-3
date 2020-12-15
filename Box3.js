@@ -7,6 +7,7 @@ class Box3{
             
          
           }
+          this.visibility = 225;
         this.body=Bodies.rectangle(x,y,width,height,options);
         this.width =width;
         this.height =height;
@@ -37,21 +38,8 @@ class Box3{
          
         }
         score(){
-            if(this.Visibility<0&&this.Visibility>1005){
+            if(this.visibility<0&&this.visibility>-105){
          score++
      }}
     }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
