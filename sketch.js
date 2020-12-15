@@ -5,8 +5,12 @@ const Body=Matter.Body;
 const Constraint = Matter.Constraint;
 
 var engine, world,polygon_Img,b1,b2,tries=0,score=0;
+var bg="sunrise.png"
+var backgroundImg;
+var gameState = "onSling";
 function preload(){
 polygon_Img=loadImage("polygon.png")
+getBackgroundImg()
 }
 function setup(){
      canvas = createCanvas(1200,600);
@@ -63,8 +67,9 @@ function setup(){
   
 }
 function draw(){
-    background("#382C2C");
- 
+  
+ if(backgroundImg)
+ background(backgroundImg)
      Engine.update(engine);
 
 fill("white")
@@ -172,31 +177,37 @@ text("Score:"+score,20,20)
     }
 
     function mouseDragged(){
-        Matter.Body.setPosition(this.polygon,{x:mouseX,y:mouseY});
+        if (gameState!=="launched"){
+            Matter.Body.setPosition(this.polygon, {x: mouseX , y: mouseY});
+        }
     }
     function mouseReleased(){
+        gameState="launched"
         slingshot.fly();
     }
 function keyPressed(){
     if(keyCode===32){
+        gameState="onSling"
         slingshot.attach(this.polygon)
-       
+        Matter.Body.setPosition(this.polygon,{x:100,y:200})
         tries=tries+1
     }
 }
-async function getBackgroundImage(){
-
+async function getBackgroundImg(){
     var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
-    var resJson = await response.json();
-    var datetime = resJson.datetime;
-    var hr = datetime.slice(11,13);
-    if(hr>=06&&hr<=18){
-    background(200)
+    var responseJSON = await response.json();
+
+    var datetime = responseJSON.datetime;
+    var hour = datetime.slice(11,13);
+    
+    if(hour>=0600 && hour<=1900){
+        bg = "sunrise.png";
     }
-    else {
-       background("#382C2C")
+    else{
+        bg = "night.webp";
     }
-   
-    console.log(hr);
-    }
+
+    backgroundImg = loadImage(bg);
+    console.log(backgroundImg);
+}
 
