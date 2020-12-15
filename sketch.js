@@ -174,6 +174,7 @@ text("Score:"+score,20,20)
    fill("#FF0000")
     text("TIP:Do not drag the hexagon so long and release it as quickly as possible in the correct trajectory,Wish you good luck",90,540)
     text("Tries "+tries,55,170)
+   
     }
 
     function mouseDragged(){
